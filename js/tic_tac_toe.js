@@ -1,5 +1,4 @@
 
-// var anyAvailableMoves;
 
 $(document).ready(function() {
 
@@ -7,15 +6,15 @@ $(document).ready(function() {
 	var imageHeight = "100px";
 
 	var createImage = function () {
-		$("#1").css("background-image", "url(images/cat.jpg)");
+		$("#1").css("background-image", "url(images/cat.png)");
 		$("#2").css("background-image", "url(images/dog.png)");
-		$("#3").css("background-image", "url(images/chicken.jpg)");
-		$("#4").css("background-image", "url(images/dragon.jpg)");
-		$("#5").css("background-image", "url(images/horse.jpg)");
-		$("#6").css("background-image", "url(images/monkey.jpg)");
-		$("#7").css("background-image", "url(images/mouse.jpg)");
-		$("#8").css("background-image", "url(images/rabbit.jpg)");
-		$("#9").css("background-image", "url(images/pig.jpg)");
+		$("#3").css("background-image", "url(images/chicken.png)");
+		$("#4").css("background-image", "url(images/dragon.png)");
+		$("#5").css("background-image", "url(images/horse.png)");
+		$("#6").css("background-image", "url(images/monkey.png)");
+		$("#7").css("background-image", "url(images/mouse.png)");
+		$("#8").css("background-image", "url(images/rabbit.png)");
+		$("#9").css("background-image", "url(images/pig.png)");
 	};
 
 	createImage();
@@ -25,6 +24,14 @@ $(document).ready(function() {
 	var numOfOWins = 0;
 	var numOfXWins = 0;
 
+
+	$("td.tile").hover(function(){
+    	$(this).css("background-color", "#02baff");
+
+  	}, function () {
+  		$(this).css("background-color", "");
+
+  	});
 
 	$("td.tile").on("click", function (event) {
 
@@ -50,22 +57,19 @@ $(document).ready(function() {
 			} 
 		}
 
-		else if ($("#dropDownID option:selected").text() === "High Level") {
-			getHighLevelComputerMove();
-		}
-
 		if (isHorizontalWin($this.parent().attr("id")) || isVerticalWin($this.attr("id")) || isDiagonalWin($this.attr("id"))) {
 				alertMessage($this.attr("id"));
 				return true;
 		} 
 
-		else if (numOfClicks >= 9){
+		if (numOfClicks >= 9){
 			alert("a draw.");
 			numOfDraws++;
 			$("#numOfTies").html(numOfDraws);
 			return true;
 		}
 	});
+
 
 	var anyAvailableMoves = function () {
 		// Go through all TDs and if any don't have X or O, return true
@@ -99,62 +103,6 @@ $(document).ready(function() {
 	};
 
 
-	var getHighLevelComputerMove = function () {
-
-		// var $computerMove = "";
-
-		// if ($("#5").html() === ""){
-		// 	$computerMove = $("#5");
-		// }
-
-		// else if ($("#1").html() === "X" && $("#9").html() === "") {
-		// 	$computerMove = $("#9");
-		// }
-
-		// else if ($("#3").html() === "X" && $("#7").html() === "") {
-		// 	$computerMove = $("#7");
-		// }
-
-		// else if ($("#7").html() === "X" && $("#3").html() === "") {
-		// 	$computerMove = $("#3");
-		// }
-
-		// else if ($("#9").html() === "X" && $("#1").html() === "") {
-		// 	$computerMove = $("#1");
-		// }
-
-		// else if ($("#2").html() === "") {
-		// 	$computerMove = $("#2");
-		// }
-		// else if ($("#4").html() === "") {
-		// 	$computerMove = $("#4");
-		// }
-		// else if ($("#6").html() === "") {
-		// 	$computerMove = $("#6");
-		// }
-		// else if ($("#8").html() === "") {
-		// 	$computerMove = $("#8");
-		// }
-
-		// $computerMove.html("O");
-		// isTwoInARow("X");
-	};
-
-
-	var isTwoInARow = function (arg) {
-		var numInARow = 1;
-		var row = [];
-
-
-		for (var i = 0; i < $("#row1 .tile").length; i++){
-
-			if ($($("#row1 .tile")[i+1]).html() !== "") {
-				numInARow++;
-				row.push($($("#row1 .tile")[i+1]).html());
-			}
-		}
-	};
-
 
 	var alertMessage = function(colID) {
 		if ($("#" + colID).html() === "O") {
@@ -166,6 +114,7 @@ $(document).ready(function() {
 			alert ("X WON!");
 			numOfXWins++;
 			$("#numXWins").html(numOfXWins);
+
 		}
 	};
 
