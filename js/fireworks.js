@@ -1,4 +1,10 @@
 
+/* 
+	Didn't write this myself. Borrowed the code from internet~ :)
+*/
+
+
+
 var bits = 80; // how many bits
 var speed = 33; // how fast - smaller is faster
 var bangs = 5; // how many can be launched simultaneously (note that using too many can slow the script down)
@@ -32,7 +38,7 @@ if (typeof('addRVLoadEvent') != 'function') function addRVLoadEvent(funky) {
   }
 }
 
-addRVLoadEvent(light_blue_touchpaper);
+//addRVLoadEvent(light_blue_touchpaper);
 
 function light_blue_touchpaper() { 
 	if (document.getElementById) {

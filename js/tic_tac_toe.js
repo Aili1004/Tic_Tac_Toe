@@ -46,7 +46,16 @@ $(document).ready(function() {
 		numOfClicks++;
 		$this.html("X");
 
+
+
 		if ($("#dropDownID option:selected").text() === "Silly Computer"){
+			if (isHorizontalWin($this.parent().attr("id")) || isVerticalWin($this.attr("id")) || isDiagonalWin($this.attr("id"))) {
+				
+				alertMessage($this.attr("id"));
+				
+				return true;
+			} 
+
 			getRandomMove();
 			numOfClicks++;
 		}
@@ -59,6 +68,7 @@ $(document).ready(function() {
 
 		if (isHorizontalWin($this.parent().attr("id")) || isVerticalWin($this.attr("id")) || isDiagonalWin($this.attr("id"))) {
 				alertMessage($this.attr("id"));
+				
 				return true;
 		} 
 
@@ -103,7 +113,6 @@ $(document).ready(function() {
 	};
 
 
-
 	var alertMessage = function(colID) {
 		if ($("#" + colID).html() === "O") {
 			alert ("O WON!");
@@ -111,10 +120,10 @@ $(document).ready(function() {
 			$("#numOfOWins").html(numOfOWins);
 
 		} else {
+			light_blue_touchpaper(); // call the function in fireworks.js
 			alert ("X WON!");
 			numOfXWins++;
 			$("#numXWins").html(numOfXWins);
-
 		}
 	};
 
@@ -176,7 +185,7 @@ $(document).ready(function() {
 			$thirdDiagonal = $("#" + (parseInt(colID)+4)).html();
 		}
 
-		// if user clicks middle celll, there are two diagnals to check
+		// if user clicks middle cell, there are two diagnals to check
 		else if (colID === "5"){
 			$firstDiagonal = $("#" + (parseInt(colID)+2)).html();
 			$secondDiagonal = $("#" + colID).html();
