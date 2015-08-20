@@ -7,7 +7,7 @@
 - line 15 in index.html, this line of code is included to be able to use effect() function in tic_tac_toe.js which is used in line 32. 
 
 
-##--- Playing The Game ---##
+#####Playing The Game#####
 
 - always assume the user is playing with "X"
 
