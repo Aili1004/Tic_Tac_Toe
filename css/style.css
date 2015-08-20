@@ -1,5 +1,3 @@
-
-
 h1 {
 	color: red;
 	text-align: center;
@@ -7,14 +5,18 @@ h1 {
 	font-size: 50px;
 }
 
+h3 {
+	margin-left: 530px;
+	font-family: 'Chewy', cursive;
+}
+
 body {
-	background-color: #E0E0E0;
+	background-image: url("../images/sky.jpg");
 }
 
 .board table {
 
 	padding-left: 150px;
-	padding-top: 30px;
 }
 
 .board table tr td {
@@ -23,8 +25,6 @@ body {
 	text-align: center;
 	font-size: 80px;
 }
-
-
 
 .score table {
 	display: inline-block;
@@ -42,7 +42,6 @@ body {
 	height: 40px;
 }
 
-
 .container {
 	width: 50%;
 	height: 400px;
@@ -58,7 +57,7 @@ body {
 }
 
 #draw {
-	background-color: #99FF99;
+	background-color: #FF9966;
 }
 
 .buttons {
@@ -88,10 +87,7 @@ body {
 	margin-left: 530px;
 }
 
-h3 {
-	margin-left: 530px;
-	font-family: 'Chewy', cursive;
-}
+
 
 
 

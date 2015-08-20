@@ -1,19 +1,18 @@
 
 /* 
-	Didn't write this myself. Borrowed the code from internet~ :)
+	Didn't write this file myself. 'Borrowed' the code from Internet~ :)
 */
-
 
 
 var bits = 80; // how many bits
 var speed = 33; // how fast - smaller is faster
 var bangs = 5; // how many can be launched simultaneously (note that using too many can slow the script down)
-var colours = new Array("#03f", "#f03", "#0e0", "#93f", "#0cf", "#f93", "#f0c"); 
+var colours = new Array("#03f", "#f03", "#0e0",  "#93f", "#0cf", "#f93", "#f0c"); 
 
 /****************************
 *      Fireworks Effect     *
 *(c)2004-14 mf2fm web-design*
-*  http://www.mf2fm.com/rv  *
+*  http://www.mf2fm.com/rv  *  
 * DON'T EDIT BELOW THIS BOX *
 ****************************/
 var bangheight = new Array();
@@ -26,7 +25,7 @@ var dY = new Array();
 var stars = new Array();
 var decay = new Array();
 var swide = 800;
-var shigh = 600;
+var shigh = 600; 
 var boddie;
 
 if (typeof('addRVLoadEvent') != 'function') function addRVLoadEvent(funky) {
@@ -38,7 +37,6 @@ if (typeof('addRVLoadEvent') != 'function') function addRVLoadEvent(funky) {
   }
 }
 
-//addRVLoadEvent(light_blue_touchpaper);
 
 function light_blue_touchpaper() { 
 	if (document.getElementById) {

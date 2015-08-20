@@ -1,10 +1,13 @@
-
+//  _____  _  ____    _____  ____  ____    _____  ____  _____
+// /__ __\/ \/   _\  /__ __\/  _ \/   _\  /__ __\/  _ \/  __/
+//   / \  | ||  /      / \  | / \||  /      / \  | / \||  \  
+//   | |  | ||  \_     | |  | |-|||  \_     | |  | \_/||  /_ 
+//   \_/  \_/\____/    \_/  \_/ \|\____/    \_/  \____/\____\
+                                                          
 
 $(document).ready(function() {
 
-	var imageWidth = "100px";
-	var imageHeight = "100px";
-
+	// create 9 images instead of tiles for the board
 	var createImage = function () {
 		$("#1").css("background-image", "url(images/cat.png)");
 		$("#2").css("background-image", "url(images/dog.png)");
@@ -24,42 +27,50 @@ $(document).ready(function() {
 	var numOfOWins = 0;
 	var numOfXWins = 0;
 
-
+	// when the mouse hover the image, change the background color and make it shake
 	$("td.tile").hover(function(){
-    	$(this).css("background-color", "#02baff");
+    	$(this).css("background-color", "#99FF99");
+    	if ($(this).html() !== "X" && $(this).html() !== "O") {
+    		$(this).effect("shake", 5);
+    	}
 
   	}, function () {
   		$(this).css("background-color", "");
-
   	});
+
 
 	$("td.tile").on("click", function (event) {
 
+		// if the user hasn't selected the opponent, alert the message and return
 		if ($("#dropDownID option:selected").text() === "Choose an opponent") {
 				alert("Please choose an apponent");
 				return;
 		}
 
 		var $this = $(this);
-		$this.css("background-image", "");
-
 		numOfClicks++;
-		$this.html("X");
 
+		// when clicks on the image, the image should disappear
+		$this.css("background-image", ""); 
 
+		// when clicks on the image, replace it with "X"
+		$this.html("X");  
 
+		// if the user is playing with silly computer
 		if ($("#dropDownID option:selected").text() === "Silly Computer"){
+
+			// if the user already wins after this click, do not let the computer continue playing
 			if (isHorizontalWin($this.parent().attr("id")) || isVerticalWin($this.attr("id")) || isDiagonalWin($this.attr("id"))) {
-				
 				alertMessage($this.attr("id"));
-				
 				return true;
 			} 
 
+			// if the user did not win after the click, let the computer play randomly
 			getRandomMove();
 			numOfClicks++;
 		}
 
+		// if 2 players are playing, every second click is an "O"
 		else if ($("#dropDownID option:selected").text() === "2 Players") {
 			if (numOfClicks % 2 === 0){ 
 				$this.html("O");
@@ -68,10 +79,10 @@ $(document).ready(function() {
 
 		if (isHorizontalWin($this.parent().attr("id")) || isVerticalWin($this.attr("id")) || isDiagonalWin($this.attr("id"))) {
 				alertMessage($this.attr("id"));
-				
 				return true;
 		} 
 
+		// if there are more than 9 clicks, and no one wins, it is a draw
 		if (numOfClicks >= 9){
 			alert("a draw.");
 			numOfDraws++;
@@ -93,6 +104,7 @@ $(document).ready(function() {
 	};
 
 
+	// let the computer put an "O" randomly in the board if it is an empty tile
 	var getRandomMove = function () {
 		var randomNum = Math.floor(Math.random() * 8) + 1;
 		if ( anyAvailableMoves() ) {
@@ -101,9 +113,8 @@ $(document).ready(function() {
 				$("#"+randomNum).css("background-image", "");
 
 				if (isHorizontalWin($("#"+randomNum).parent().attr("id")) || isVerticalWin($("#"+randomNum).attr("id")) || isDiagonalWin($("#"+randomNum).attr("id"))) {
-
 					alertMessage($("#"+randomNum).attr("id"));
-					return true;
+					return true; 
 				}
 			} 
 			else {
@@ -112,22 +123,22 @@ $(document).ready(function() {
 		}
 	};
 
-
+	// alert message if either X or O wins
 	var alertMessage = function(colID) {
 		if ($("#" + colID).html() === "O") {
 			alert ("O WON!");
 			numOfOWins++;
-			$("#numOfOWins").html(numOfOWins);
+			$("#numOfOWins").html(numOfOWins); // change the number of "O Wins: "
 
 		} else {
-			light_blue_touchpaper(); // call the function in fireworks.js
+			light_blue_touchpaper(); // call the function in fireworks.js to load fireworks
 			alert ("X WON!");
 			numOfXWins++;
-			$("#numXWins").html(numOfXWins);
+			$("#numXWins").html(numOfXWins); // change the number of "X wins: "
 		}
 	};
 
-
+	// function to check if three in a row
 	var isHorizontalWin = function (rowID) {
 		var $firstColumn = $("#" + rowID).children().first().html();
 		var $secondColumn = $("#" + rowID).children().first().next().html();
@@ -139,6 +150,7 @@ $(document).ready(function() {
 		return false;
 	};
 
+	// function to check if three in a column
 	var isVerticalWin = function (colID) {
 		 var $firstRow = "";
 		 var $secondRow = "";
@@ -167,6 +179,7 @@ $(document).ready(function() {
 		
 	};
 
+	// function to check if three in diagonals 
 	var isDiagonalWin = function (colID) {
 		var $firstDiagonal = 0; // set default
 		var $secondDiagonal = 1; // set default
@@ -185,7 +198,7 @@ $(document).ready(function() {
 			$thirdDiagonal = $("#" + (parseInt(colID)+4)).html();
 		}
 
-		// if user clicks middle cell, there are two diagnals to check
+		// if user clicks middle cell, there are two diagonals to check
 		else if (colID === "5"){
 			$firstDiagonal = $("#" + (parseInt(colID)+2)).html();
 			$secondDiagonal = $("#" + colID).html();
@@ -226,27 +239,13 @@ $(document).ready(function() {
 
 	// reset everything to default
 	var reset = function () {
-		$("td.tile").html("");
-		numOfClicks = 0;
-		numOfDraws = 0;
-		numOfOWins = 0;
-		numOfXWins = 0;
-		$("#dropDownID").val('default');
-		$("#numXWins").html(numOfXWins);
-		$("#numOfOWins").html(numOfOWins);
-		$("#numOfTies").html(numOfDraws);
-		createImage();
+		location.reload(); // refresh the page
 	};
 	
 	$("#reset").on("click", function () {
 		reset();
 	});
 });
-
-
-
-
-
 
 
 
